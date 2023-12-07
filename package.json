@@ -1,0 +1,16 @@
+{
+  "name": "gpt4-webscraping",
+  "version": "1.0.0",
+  "description": "gpt with webscraping (pupeeteer)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mdbabaylan",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "openai": "^4.20.1",
+    "puppeteer": "^21.5.2"
+  }
+}
