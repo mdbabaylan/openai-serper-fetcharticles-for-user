@@ -1,6 +1,7 @@
 const OpenAI = require("openai");
 const axios = require('axios');
-const openai = new OpenAI({apiKey: 'apikey here'});
+const openai = new OpenAI({apiKey: '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'});
+const cron = require('node-cron');
 
 async function fetchArticles(userInputString){
     //userInputString = apple, tesla, google
@@ -53,14 +54,20 @@ async function fetchArticles(userInputString){
                 // Format the information into a string
                 const messages = newsArticles.map((article, index) => ({
                     role: 'system',
-                    content: `Article ${index + 1}: ${article.title} from ${article.source} on ${article.date}. ${article.snippet}. Read more: ${article.link}`,
+                    content: `Article ${index + 1}:\n${article.title}\n${article.link}\n${article.date}`,
                 }));
-                console.log(messages);
+                //console.log(messages);
             
                 // Add a user message to ask GPT-3 to summarize the articles
                 messages.push({
                     role: 'user',
-                    content: `Group the articles by topic. Make sure the "Read more: " of each article is included. The topics are ${userInputString}.`
+                    content: `Group the articles by topic. Format it in this manner
+                    """"
+                    Article Title
+                    Article Link
+                    Article Date (in MM-DD-YYYY format) Month in name format
+                    """
+                    The topics are ${userInputString}.`
                 });
             
                 // Use the messages as input to GPT-3
@@ -78,5 +85,7 @@ async function fetchArticles(userInputString){
 async function main() {
 fetchArticles("Inflation Philippines, Prices of white rice in the Philippines, Christmas");
 }
+
+cron.schedule('15 15 * * *', main); //run cron job at 3:15pm everyday
 
 main();
