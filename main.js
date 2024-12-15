@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const axios = require('axios');
-const openai = new OpenAI({apiKey: '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'});
+const openai = new OpenAI({apiKey: 'openAIKeyHere'});
 const cron = require('node-cron');
 
 async function fetchArticles(userInputString){
